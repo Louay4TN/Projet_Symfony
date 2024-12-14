@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Admin | Dashboard</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <link rel="stylesheet" href="{{asset('Admin/css/bootstrap.css')}}"/>
+        <link rel="stylesheet" href="{{asset('Admin/css/fonts/css/font-awesome.css')}}"/>
+        <link rel="stylesheet" href="{{asset('Admin/css/main.css')}}"/>
+
+    </head>
+    <body class="padTop53 ">
+        <div id="wrap">
+            <div id="top">
+                <nav class="navbar navbar-inverse navbar-fixed-top " style="padding-top: 10px;">
+                    <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
+                        <i class="icon-align-justify"></i>
+                    </a>
+                    <header class="navbar-header">
+                        <a href="index.html" class="navbar-brand">
+                        <img src="{{asset('Admin/imgs/logo.png')}}" alt=""/></a>
+                    </header>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="icon-user "></i>&nbsp; <i class="icon-chevron-down "></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li>
+                                    <a href="{{ path('app_logout') }}">
+                                        <i class="icon-signout"></i> Logout
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div id="left">
+                <div class="media user-media well-small">
+                  <a class="user-link" href="#">
+                    <div class="user-img-container">
+                        <img class="media-object img-thumbnail user-img" alt="User Picture" src="{{asset('Admin/imgs/user1.gif')}}"/>
+                    </div>
+                </a>
+
+                    <br/>
+                    <div class="media-body">
+                        <h5 class="media-heading">{{app.user.username}}</h5>
+                        <ul class="list-unstyled user-info">
+                            <li>
+                                <a class="btn btn-success btn-xs btn-circle" style="width: 10px;height: 12px;"></a> en ligne
+                            </li>
+                        </ul>
+                    </div>
+                    <br/>
+                </div>
+                <ul id="menu" class="collapse">
+                    <li class="panel">
+                        <a href="{{ path('app_default') }}">
+                            <i class="icon-edit"></i> Home
+                        </a>  
+                        <a href="{{ path('app_commande_index') }}">
+                            <i class="icon-edit"></i> Nos Commandes
+                        </a> 
+                        <a href="{{ path('app_Voiture_index') }}">
+                            <i class="icon-edit"></i> Nos Voiture
+                        </a>      
+                        <a href="{{ path('app_Voiture_new') }}">
+                         <i class="icon-edit"></i> Create new Voitures
+                        </a>   
+                        <a href="{{ path('app_user_index') }}">
+                         <i class="icon-edit"></i> Utilisateurs
+                        </a>          
+                    </li>
+                </ul>
+            </div>
+
+              <div id="content">
+                <div class="inner" style="min-height:1200px;">
+                    {% block content %}{% endblock %}
+                  </div>
+              </div>
+
+        <div id="footer">
+            <p>
+                &copy; <a>Ben Souidene Mohamed Yassine</a> &nbsp;2024 &nbsp;
+            </p>
+        </div>
+         {% for type, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endfor %}
+        <script src="{{asset('Admin/js/jquery-2.0.3.min.js')}}"></script>
+        <script src="{{asset('Admin/js/bootstrap.min.js')}}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    </body>
+</html> 

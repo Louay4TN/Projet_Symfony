@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Voiture{% endblock %}
+
+{% block content %}
+<style>
+        body {
+            background-color: #f8f9fa; /* Fond clair */
+            font-family: 'Arial', sans-serif;
+        }
+        .table {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin-top: 20px;
+            width: 100%; /* Prend toute la largeur disponible */
+        }
+        th, td {
+            padding: 15px; /* Augmenter le padding pour plus d'espace */
+        }
+        th {
+            background-color:#0694c5; /* Couleur de l'en-tête */
+            color: white;
+            text-align: left;
+        }
+        td {
+            font-size: 16px; /* Agrandir la taille du texte pour une meilleure lisibilité */
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            color: white;
+            /* background-color: #6c757d; */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        /* .btn:hover {
+            background-color: #5a6268;
+        } */
+        .container {
+            max-width: 1000px;
+        }
+        .table-responsive {
+            margin-top: 20px;
+        }
+    </style>
+ <div class="container mt-5">
+    <h1>Create new Voiture</h1>
+
+    {{ include('Voiture/_form.html.twig') }}
+
+    <a href="{{ path('app_Voiture_index') }}" class="btn btn-primary">Retour à la liste</a>
+    
+ </div>
+{% endblock %}

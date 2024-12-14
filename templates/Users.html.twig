@@ -1,0 +1,418 @@
+{# <!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Voiture E-commerce</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="templatesjungle">
+  <meta name="keywords" content="website templates">
+  <meta name="description" content="website templates">
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<link rel="stylesheet" type="text/css" href="{{asset('assets/icomoon/icomoon.css')}}">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendor.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('assets/style.css')}}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Marcellus&display=swap"
+  rel="stylesheet">
+
+</head>
+
+<body>
+ <!-- Modale affichée uniquement si success=1 -->
+    {% if app.request.query.get('success', '0') == '1' %}
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Succès</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{ app.flashes['success']|first }}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="modalCloseBtn" data-bs-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M12 19a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0-4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm-5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm7-12h-1V2a1 1 0 0 0-2 0v1H8V2a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16Zm0-11H4V6a1 1 0 0 1 1-1h1v1a1 1 0 0 0 2 0V5h8v1a1 1 0 0 0 2 0V5h1a1 1 0 0 1 1 1ZM7 15a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0 4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-right" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M17.92 11.62a1 1 0 0 0-.21-.33l-5-5a1 1 0 0 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l5-5a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="category" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 5.5h-6.28l-.32-1a3 3 0 0 0-2.84-2H5a3 3 0 0 0-3 3v13a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-10a3 3 0 0 0-3-3Zm1 13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1h4.56a1 1 0 0 1 .95.68l.54 1.64a1 1 0 0 0 .95.68h7a1 1 0 0 1 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="calendar" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7h16Zm0-9H4V7a1 1 0 0 1 1-1h2v1a1 1 0 0 0 2 0V6h6v1a1 1 0 0 0 2 0V6h2a1 1 0 0 1 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="heart" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M20.16 4.61A6.27 6.27 0 0 0 12 4a6.27 6.27 0 0 0-8.16 9.48l7.45 7.45a1 1 0 0 0 1.42 0l7.45-7.45a6.27 6.27 0 0 0 0-8.87Zm-1.41 7.46L12 18.81l-6.75-6.74a4.28 4.28 0 0 1 3-7.3a4.25 4.25 0 0 1 3 1.25a1 1 0 0 0 1.42 0a4.27 4.27 0 0 1 6 6.05Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19 11H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="cart" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M8.5 19a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 8.5 19ZM19 16H7a1 1 0 0 1 0-2h8.491a3.013 3.013 0 0 0 2.885-2.176l1.585-5.55A1 1 0 0 0 19 5H6.74a3.007 3.007 0 0 0-2.82-2H3a1 1 0 0 0 0 2h.921a1.005 1.005 0 0 1 .962.725l.155.545v.005l1.641 5.742A3 3 0 0 0 7 18h12a1 1 0 0 0 0-2Zm-1.326-9l-1.22 4.274a1.005 1.005 0 0 1-.963.726H8.754l-.255-.892L7.326 7ZM16.5 19a1.5 1.5 0 1 0 1.5 1.5a1.5 1.5 0 0 0-1.5-1.5Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="check" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M18.71 7.21a1 1 0 0 0-1.42 0l-7.45 7.46l-3.13-3.14A1 1 0 1 0 5.29 13l3.84 3.84a1 1 0 0 0 1.42 0l8.16-8.16a1 1 0 0 0 0-1.47Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="trash" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M10 18a1 1 0 0 0 1-1v-6a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1ZM20 6h-4V5a3 3 0 0 0-3-3h-2a3 3 0 0 0-3 3v1H4a1 1 0 0 0 0 2h1v11a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8h1a1 1 0 0 0 0-2ZM10 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h-4Zm7 14a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8h10Zm-3-1a1 1 0 0 0 1-1v-6a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-outline" viewBox="0 0 15 15">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+          d="M7.5 9.804L5.337 11l.413-2.533L4 6.674l2.418-.37L7.5 4l1.082 2.304l2.418.37l-1.75 1.793L9.663 11L7.5 9.804Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-solid" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="search" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M15.71 12.71a6 6 0 1 0-7.42 0a10 10 0 0 0-6.22 8.18a1 1 0 0 0 2 .22a8 8 0 0 1 15.9 0a1 1 0 0 0 1 .89h.11a1 1 0 0 0 .88-1.1a10 10 0 0 0-6.25-8.19ZM12 12a4 4 0 1 1 4-4a4 4 0 0 1-4 4Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="close" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
+      </symbol>
+
+    </defs>
+  </svg>
+
+
+
+{% block stylesheet %}
+  <nav class="main-menu d-flex navbar fixed-top navbar-expand-lg py-4 ">
+    <div class="container-fluid px-md-5">
+      <div class="main-logo d-lg-none">
+        <a href="index.html">
+          <img src="{{asset('assets/images/logo.png')}}" alt="logo" class="img-fluid">
+        </a>
+      </div>
+
+      <button class="navbar-toggler border-0 shadow-none " type="button" data-bs-toggle="offcanvas"
+        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="offcanvas offcanvas-end bg-black" tabindex="-1" id="offcanvasNavbar"
+        aria-labelledby="offcanvasNavbarLabel">
+
+        <div class="offcanvas-header justify-content-center">
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body justify-content-between align-items-center">
+
+          <div class="main-logo">
+            <a href="index.html">
+              <img src="{{asset('assets/images/logo.png')}}" alt="logo" class="img-fluid">
+            </a>
+          </div>
+
+         
+          <div class="d-none d-lg-flex justify-content-end">
+            <ul class="d-flex justify-content-end list-unstyled m-0">
+        
+              {% if app.user %}
+                <li>
+                    <a href="{{ path('app_logout') }}" class="mx-3" style="color:white;">
+                        <iconify-icon icon="mdi:logout" class="fs-4 text-light"></iconify-icon> Logout
+                    </a>
+                </li>
+              {% else %}
+                    <li class="lh-1">
+                <a href="{{ path('app_login') }}" class="mx-3">
+                  <iconify-icon icon="healthicons:person" class="fs-4 text-light"></iconify-icon>
+                </a>
+              </li>
+              {% endif %}
+
+
+            </ul>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="container-fluid px-md-5 d-lg-none">
+
+      <ul class="d-flex justify-content-end list-unstyled m-0 mt-4">
+        <li class="lh-1">
+          <a href="account.html" class="me-4">
+            <iconify-icon icon="healthicons:person" class="fs-4 text-light"></iconify-icon>
+          </a>
+        </li>
+        <li class="lh-1">
+          <a href="wishlist.html" class="me-4">
+            <iconify-icon icon="mdi:heart" class="fs-4 text-light"></iconify-icon>
+          </a>
+        </li>
+
+        <li class="lh-1">
+          <a href="#" class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+            aria-controls="offcanvasCart">
+            <iconify-icon icon="mdi:cart" class="fs-4 text-light position-relative"></iconify-icon>
+            <span class="position-absolute translate-middle badge rounded-circle text-black bg-light p-1">
+              03
+            </span>
+          </a>
+        </li>
+
+        <li class="lh-1">
+          <a href="#" class="me-4" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch"
+            aria-controls="offcanvasSearch">
+            <iconify-icon icon="tabler:search" class="fs-4 text-light"></iconify-icon>
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+  </nav>
+  {% endblock %}
+{% block body %}{% endblock %}
+  
+
+  <footer id="footer">
+    <div class="container-fluid px-3 px-md-5  padding-medium">
+      <div class="row mt-5">
+        <div class="col-md-4">
+          <div class="footer-menu">
+            <img src="{{asset('assets/images/logo-dark.png')}}" alt="logo">
+            <p class="mt-4">Find Your Perfect Pair Today At Eyewear</p>
+            <div class="social-links mt-4">
+              <ul class="d-flex list-unstyled gap-3">
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon fs-4  me-4" icon="ri:facebook-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon fs-4  me-4" icon="ri:twitter-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon fs-4  me-4" icon="ri:pinterest-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon fs-4  me-4" icon="ri:instagram-fill"></iconify-icon>
+                  </a>
+                </li>
+                <li class="social">
+                  <a href="#">
+                    <iconify-icon class="social-icon fs-4  me-4" icon="ri:youtube-fill"></iconify-icon>
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div id="footer-bottom">
+    <hr class="m-0">
+    <div class="container-fluid  px-3 px-md-5 py-2">
+      <div class="row mt-3">
+        <div class="col-md-6 copyright">
+          <p class="secondary-font">© 2024 EYEWEAR-YASSINE.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </footer>
+
+
+
+<script>
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+        const modal = new bootstrap.Modal(successModal);
+        modal.show();
+
+        const closeButton = document.getElementById('modalCloseBtn');
+        closeButton.addEventListener('click', () => {
+            window.location.href = "{{ path('app_default') }}";
+        });
+    }
+</script>
+
+
+  <script src="{{asset('assets/js/jquery-1.11.0.min.js')}}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <script src="{{asset('assets/js/plugins.js')}}"></script>
+  <script src="{{asset('assets/js/script.js')}}"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html> #}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Scarica gratis GARAGE Template html/css - Web Domus Italia - Web Agency </title>
+	<meta name="description" content="Scarica gratis il nostro Template HTML/CSS GARAGE. Se avete bisogno di un design per il vostro sito web GARAGE può fare per voi. Web Domus Italia">
+	<meta name="author" content="Web Domus Italia">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/source/bootstrap-3.3.6-dist/css/bootstrap.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/source/font-awesome-4.5.0/css/font-awesome.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/style/slider.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{asset('assets/style/mystyle.css')}}">
+</head>
+<body>
+
+<style> /* Barre de navigation */
+.navbar-dark {
+    background-color: #343a40;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+.navbar-brand:hover {
+    color: #007bff;
+}
+
+/* Liens de navigation */
+.nav-link {
+    color: #adb5bd;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.nav-link span {
+    font-weight: 500;
+}
+
+/* Icônes */
+.iconify-icon {
+    vertical-align: middle;
+}
+
+/* Mobile responsive */
+.navbar-toggler {
+    border: none;
+}
+</style>
+
+              <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold fs-4">MyWebsite</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                {% if app.user %}
+                <li class="nav-item">
+                    <a href="{{ path('app_logout') }}" class="nav-link d-flex align-items-center">
+                        <iconify-icon icon="mdi:logout" class="fs-4 text-light me-2"></iconify-icon>
+                        <span class="text-light">Logout</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{{ path('app_login') }}" class="nav-link d-flex align-items-center">
+                        <iconify-icon icon="healthicons:person" class="fs-4 text-light me-2"></iconify-icon>
+                        <span class="text-light">Login</span>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block body %}{% endblock %}
+
+<div class="bottommenu">
+		<div class="bottomlogo">
+  
+		<span class="dotlogo">&bullet;</span><img src="{{asset('assets/image/collectionlogo1.png')}}" alt="logo1"><span class="dotlogo">&bullet;;</span>
+		</div>
+	
+		<p>"Lorem ipsum dolor sit amet, consectetur,  sed do eiusmod tempor incididunt <br>
+			eiusmod tempor incididunt </p>
+       
+     
+		 <img src="{{asset('assets/image/line.png')}}" alt="line"> <br>
+		
+			<div class="footer">
+				<div class="copyright">
+				  &copy; Copy right 2024 | <a href="#">Privacy </a>| <a href="#">Policy</a>
+				</div>
+				<div class="atisda">
+					 Designed by <a href="http://www.webdomus.net/">Web Domus Italia - Web Agency </a> 
+				</div>
+        
+			</div>
+	</div>
+<script type="text/javascript" src="{{asset('assets/source/bootstrap-3.3.6-dist/js/jquery.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/source/js/isotope.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/source/js/myscript.js')}}"></script> 
+<script type="text/javascript" src="{{asset('assets/source/bootstrap-3.3.6-dist/js/jquery.1.11.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/source/bootstrap-3.3.6-dist/js/bootstrap.js')}}"></script>
+</body>
+</html>

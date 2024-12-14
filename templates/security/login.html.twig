@@ -1,0 +1,159 @@
+{% extends 'login.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block content %}
+
+     {# <div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" method="post">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="text-center p-b-26">
+                        You are logged in as {{ app.user.userIdentifier }},
+                        <a href="{{ path('app_logout') }}" class="txt2">Logout</a>
+                    </div>
+                {% else %}
+                    <span class="login100-form-title p-b-26">Welcome</span>
+                    <label>Username</label>
+                    <div class="wrap-input100 validate-input" >
+                        <input class="input100" type="text" value="{{ last_username }}" name="username" id="inputUsername" autocomplete="username" required autofocus>
+                        <span class="focus-input100" ></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye" id="togglePassword"></i>
+                        </span>
+                        <label>Password</label>
+                        <input class="input100" type="password" name="password" id="inputPassword" autocomplete="current-password" required>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" type="submit">
+                                Login
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="text-center p-t-115">
+                        <span class="txt1">Don’t have an account?</span>
+                        <a class="txt2" href="{{ path('app_register') }}">Sign Up</a>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+  
+
+  <script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('inputPassword');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('zmdi-eye');
+        this.classList.toggle('zmdi-eye-off');
+    });
+</script> #}
+<div class="limiter">
+    <div class="container-login100" style="min-height: 100vh; background: linear-gradient(135deg, #74ebd5, #ACB6E5); display: flex; align-items: center; justify-content: center;">
+        <div class="wrap-login100" style="background: #fff; padding: 3rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); max-width: 400px; width: 100%;">
+            <form class="login100-form validate-form" method="post" style="width: 100%;">
+                {% if error %}
+                    <div class="alert alert-danger" style="margin-bottom: 1.5rem;">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                {% if app.user %}
+                    <div class="text-center p-b-26" style="margin-bottom: 2rem;">
+                        <p style="font-size: 1.2rem; color: #333;">You are logged in as <strong>{{ app.user.userIdentifier }}</strong>,</p>
+                        <a href="{{ path('app_logout') }}" class="txt2" style="color: #2575fc; text-decoration: none;">Logout</a>
+                    </div>
+                {% else %}
+                    <span class="login100-form-title p-b-26" style="display: block; font-size: 1.8rem; color: #333; text-align: center; margin-bottom: 1.5rem;">Welcome</span>
+
+                    <!-- Username Field -->
+                    <label for="inputUsername" style="font-weight: bold; color: #555;">Username</label>
+                    <div class="wrap-input100 validate-input" style="margin-bottom: 1.5rem;">
+                        <input 
+                            class="input100" 
+                            type="text" 
+                            value="{{ last_username }}" 
+                            name="username" 
+                            id="inputUsername" 
+                            autocomplete="username" 
+                            required 
+                            autofocus 
+                            style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;"
+                            aria-label="Username"
+                        >
+                    </div>
+
+                    <!-- Password Field -->
+                    <label for="inputPassword" style="font-weight: bold; color: #555;">Password</label>
+                    <div class="wrap-input100 validate-input" style="position: relative; margin-bottom: 1.5rem;">
+                        <input 
+                            class="input100" 
+                            type="password" 
+                            name="password" 
+                            id="inputPassword" 
+                            autocomplete="current-password" 
+                            required 
+                            style="width: 100%; padding: 10px 15px; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem;"
+                            aria-label="Password"
+                        >
+                        <span class="btn-show-pass" style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer;">
+                            <i class="zmdi zmdi-eye" id="togglePassword" aria-label="Toggle password visibility" style="font-size: 1.2rem; color: #999;"></i>
+                        </span>
+                    </div>
+
+                    <!-- CSRF Token -->
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                    <!-- Login Button -->
+                    <div class="container-login100-form-btn" style="margin-top: 2rem;">
+                        <button 
+                            class="login100-form-btn" 
+                            type="submit" 
+                            style="width: 100%; background: linear-gradient(135deg, #6a11cb, #2575fc); color: #fff; padding: 10px 15px; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer;"
+                        >
+                            Login
+                        </button>
+                    </div>
+
+                    <!-- Registration Link -->
+                    <div class="text-center p-t-115" style="margin-top: 2rem;">
+                        <span class="txt1" style="color: #555; font-size: 0.9rem;">Don’t have an account?</span>
+                        <a class="txt2" href="{{ path('app_register') }}" style="color: #2575fc; text-decoration: none; font-size: 0.9rem;">Sign Up</a>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Password Toggle Script -->
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('inputPassword');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Toggle between eye icons
+        this.classList.toggle('zmdi-eye');
+        this.classList.toggle('zmdi-eye-off');
+    });
+</script>
+
+{% endblock %}

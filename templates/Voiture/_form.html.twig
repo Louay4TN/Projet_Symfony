@@ -1,0 +1,153 @@
+{# 
+
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.Quantite, 'Quantity', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.Quantite, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Quantite) }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.Prix, 'Price', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.Prix, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Prix) }}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.photo, 'Product Image', {'label_attr': {'class': 'form-label'}}) }}
+        <div class="custom-file">
+            {{ form_widget(form.photo, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        {{ form_errors(form.photo) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.Description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.Description) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.Modele, 'Model', {'label_attr': {'class': 'form-label'}}) }}
+        {{ form_widget(form.Modele, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.Modele) }}
+    </div>
+<br>
+    <button type="submit" class="btn btn-success btn-block mt-4">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+ #}
+{# {% extends 'base.html.twig' %} #}
+
+
+
+{% block content %}
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-outline-primary {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #217dbb;
+        }
+    </style>
+
+    <div class="container mt-5">
+        {# <h1>Edit Voiture</h1> #}
+
+        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.Quantite, 'Quantity', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.Quantite, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.Quantite) }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form_label(form.Prix, 'Price', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(form.Prix, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.Prix) }}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.photo, 'Product Image', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.photo, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.photo) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.Description, 'Description', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.Description, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Description) }}
+        </div>
+
+        <div class="mb-3">
+            {{ form_label(form.Modele, 'Model', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.Modele, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.Modele) }}
+        </div>
+
+        <button type="submit" class="btn btn-success btn-block mt-4">{{ button_label|default('Save') }}</button>
+        {{ form_end(form) }}
+
+        {# <div class="d-flex justify-content-between mt-4">
+            <a href="{{ path('app_Voiture_index') }}" class="btn btn-outline-primary">Back to list</a>
+        </div> #}
+    </div>
+{% endblock %}

@@ -1,0 +1,164 @@
+ {% extends 'Users.html.twig' %}
+    {% block stylesheet %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-black">
+    <div class="container px-4 px-lg-5">
+        <!-- Logo à gauche -->
+        <a class="navbar-brand" href="index.html">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="img-fluid" style="max-height: 50px;">
+        </a>
+        <!-- Bouton pour les menus en version mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Contenu du menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_default')}}">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+
+{% block body %} 
+<br>
+<style>
+/* Section générale */
+section.py-5 {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Titre principal */
+h1.display-5 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Badge de quantité */
+.badge.bg-success {
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    border-radius: 20px;
+}
+
+/* Prix */
+.fs-4 {
+    font-size: 1.5rem;
+}
+
+.text-danger {
+    color: #dc3545 !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Image */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Boutons */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    font-size: 1.1rem;
+}
+
+/* Alignement */
+.d-flex {
+    gap: 10px;
+}
+
+</style>
+
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="img-fluid rounded shadow-sm" src="{{ asset('uploads/images/' ~ Voiture.photo) }}" alt="Car Image" />
+            </div>
+            <div class="col-md-6">
+                <span class="badge bg-success mb-2">{{ Voiture.quantite }} Unité{{ Voiture.quantite > 1 ? 's' : '' }}</span>
+                <h1 class="display-5 fw-bolder text-primary">{{ Voiture.Modele }}</h1>
+                <div class="fs-4 my-3">
+                    <span class="text-muted text-decoration-line-through">{{ Voiture.prix + 36 }} DT</span>
+                    <span class="text-danger fw-bold ms-2">{{ Voiture.prix }} DT</span>
+                </div>
+                <p class="lead text-secondary">{{ Voiture.Description }}</p>
+                <div class="d-flex">
+                    {% if Voiture.quantite > 0 %}
+                        <form action="{{ path('app_default_achat', { id: Voiture.id }) }}" method="post">
+                            <button class="btn btn-primary btn-lg me-2" type="submit">
+                                <i class="bi bi-cart-fill me-1"></i>
+                                Acheter
+                            </button>
+                        </form>
+                    {% else %}
+                        <button class="btn btn-secondary btn-lg" type="button" disabled>
+                            <i class="bi bi-x-circle-fill me-1"></i>
+                            Indisponible
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  {# <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ asset('uploads/images/' ~ Voiture.photo) }}"  alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1">{{Voiture.quantite}} Unité</div>
+                        <h1 class="display-5 fw-bolder">{{Voiture.Modele}}</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through">{{Voiture.prix+25}}DT</span>
+                            <span>{{Voiture.prix}}DT</span>
+                        </div>
+                        <p class="lead">{{Voiture.Description}}</p>
+                         <div class="d-flex">
+                    {% if Voiture.quantite > 0 %}
+                        <form action="{{ path('app_default_achat', {id: Voiture.id}) }}" method="post">
+                            <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+                                <i class="bi-cart-fill me-1"></i>
+                                Acheter
+                            </button>
+                        </form>
+
+
+                    {% else %}
+                        <button class="btn btn-outline-dark flex-shrink-0" type="button" disabled>
+                            <i class="bi-cart-fill me-1"></i>
+                            Indisponible
+                        </button>
+                    {% endif %}
+                </div>
+                    </div>
+                </div>
+            </div>
+        </section>    #}
+
+  
+        {% endblock %}

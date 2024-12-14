@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Commande{% endblock %}
+ {% block stylesheet %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-black">
+    <div class="container px-4 px-lg-5">
+        <!-- Logo à gauche -->
+        <a class="navbar-brand" href="index.html">
+            <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="img-fluid" style="max-height: 50px;">
+        </a>
+        <!-- Bouton pour les menus en version mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Contenu du menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_default')}}">Home</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% endblock %}
+{% block content %}
+    <h1>Create new Commande</h1>
+
+    {{ include('commande/_form.html.twig') }}
+
+    <div class="text-center">
+                        <a href="{{ path('app_commande_index') }}" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-arrow-left"></i> Retour à la liste
+                        </a>
+                    </div>
+{% endblock %}

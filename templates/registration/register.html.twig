@@ -1,0 +1,114 @@
+{% extends 'login.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header text-center bg-primary text-white">
+                    <h3>Sign Up</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+
+                    <!-- Username Field -->
+                    <div class="mb-3">
+                        <label for="inputUsername" class="form-label">Username</label>
+                        {{ form_widget(registrationForm.username, {
+                            'attr': {
+                                'class': 'form-control', 
+                                'placeholder': 'Username', 
+                                'id': 'inputUsername'
+                            }
+                        }) }}
+                        {{ form_errors(registrationForm.username) }}
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="mb-3 position-relative">
+                        <label for="inputPassword" class="form-label">Password</label>
+                        <div class="input-group">
+                            {{ form_widget(registrationForm.plainPassword, {
+                                'attr': {
+                                    'class': 'form-control', 
+                                    'placeholder': 'Password', 
+                                    'id': 'inputPassword', 
+                                    'type': 'password'
+                                }
+                            }) }}
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="zmdi zmdi-eye"></i>
+                            </button>
+                        </div>
+                        {{ form_errors(registrationForm.plainPassword) }}
+                    </div>
+
+                    <!-- Phone Field -->
+                    <div class="mb-3">
+                        <label for="inputPhone" class="form-label">Phone</label>
+                        {{ form_widget(registrationForm.phone, {
+                            'attr': {
+                                'class': 'form-control', 
+                                'placeholder': 'Phone', 
+                                'pattern': '\\d{8}', 
+                                'title': 'The phone number must contain exactly 8 digits', 
+                                'maxlength': '8', 
+                                'minlength': '8', 
+                                'required': 'required',
+                                'id': 'inputPhone'
+                            }
+                        }) }}
+                        {{ form_errors(registrationForm.phone) }}
+                    </div>
+
+                    <!-- Agree to Terms -->
+                    <div class="form-check mb-3">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">
+                            I agree to the terms and conditions
+                        </label>
+                        {{ form_errors(registrationForm.agreeTerms) }}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">
+                            Sign Up
+                        </button>
+                    </div>
+
+                    <!-- Redirect to Login -->
+                    <div class="text-center mt-3">
+                        <span>Already have an account?</span>
+                        <a href="{{ path('app_login') }}">Login</a>
+                    </div>
+
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('inputPassword');
+
+    if (togglePassword && passwordInput) {
+        togglePassword.addEventListener('click', function () {
+            const currentType = passwordInput.getAttribute('type');
+            const newType = currentType === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', newType);
+
+            this.querySelector('i').classList.toggle('zmdi-eye');
+            this.querySelector('i').classList.toggle('zmdi-eye-off');
+        });
+    } else {
+        console.error("Password toggle elements not found.");
+    }
+});
+</script>
+{% endblock %}

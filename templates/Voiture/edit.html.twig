@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Voiture{% endblock %}
+
+{% block content %}
+  <div class="container mt-5">
+        <h1 class="text-center mb-5">Edit Voiture</h1>
+
+        {{ include('Voiture/_form.html.twig', {'button_label': 'Update'}) }}
+<br>
+ {{ include('Voiture/_delete_form.html.twig') }}
+ <br>
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ path('app_Voiture_index') }}" class="btn btn-outline-primary btn-primary">Back to list</a>
+        </div>
+       
+    </div>
+            
+
+{% endblock %}
+
+

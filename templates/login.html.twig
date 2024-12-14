@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="{{asset('Auth/images/icons/favicon.ico')}}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../vendor/Auth/bootstrap/css/bootstrap.min.css">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{{asset('Auth/fonts/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{{asset('Auth/css/util.css')}}">
+    <link rel="stylesheet" href="{{asset('Auth/css/main.css')}}">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .login-container .form-group label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .login-container .btn-primary {
+            background: #6a11cb;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+        }
+
+        .login-container .btn-primary:hover {
+            background: #5b0eb3;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .footer a {
+            color: #2575fc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+  {% block content %} {% endblock %}
+    <!-- jQuery -->
+    <script src="../vendor/Authvendor/jquery/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="../vendor/Auth/bootstrap/js/popper.js"></script>
+    <script src="../vendor/Auth/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

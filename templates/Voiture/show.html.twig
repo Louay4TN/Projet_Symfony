@@ -1,0 +1,134 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Voiture{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #eef2f3;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .img-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #81BFDA;
+            color: white;
+            font-size: 18px;
+        }
+
+        td {
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+        }
+
+        .btn-primary:hover {
+            background-color: #217dbb;
+        }
+
+        .btn-success {
+            background-color: #2ecc71;
+        }
+
+        .btn-success:hover {
+            background-color: #28b463;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Détails de la Voiture</h1>
+
+        <div class="img-container">
+            <img src="{{ asset('uploads/images/' ~ Voiture.photo) }}" alt="Photo de la Voiture">
+        </div>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Quantité</th>
+                    <td>{{ Voiture.Quantite }}</td>
+                </tr>
+                <tr>
+                    <th>Prix</th>
+                    <td>{{ Voiture.Prix }} DT</td>
+                </tr>
+                <tr>
+                    <th>Modèle</th>
+                    <td>{{ Voiture.Modele }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ Voiture.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="btn-container">
+            <a href="{{ path('app_Voiture_index') }}" class="btn btn-primary">Retour à la liste</a>
+            <a href="{{ path('app_Voiture_edit', {'id': Voiture.id}) }}" class="btn btn-success">Modifier</a>
+        </div>
+
+        {{ include('Voiture/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
